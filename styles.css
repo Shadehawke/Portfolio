@@ -1,0 +1,26 @@
+body {
+    background-image: url("images/raven background.jpg");
+    height: 700px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+footer {
+    position: fixed;
+    margin-top: 2%;
+    height: 50;
+    width: 100%;
+    text-align: center;
+    font-size: 0.8em;
+    bottom: 0;
+}
+
+.navbar-brand {
+    margin-left: 20px;
+}
+
+.navbar-nav {
+    margin-right: 30px;
+}
