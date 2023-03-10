@@ -22,9 +22,42 @@ footer {
     bottom: 0;
 }
 
+li {
+    margin-right: 70px;
+    margin-top: -30px;
+}
+
+.nav-links a:link {
+    text-decoration: none;
+    color: black;
+}
+
+.nav-links a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+.nav-links a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.nav-links a:active {
+    text-decoration: none;
+    color: black;
+}
+
 .navbar {
     width: 100%;
     height: 50px;
+}
+
+.nav-links {
+    list-style-type: none;
+    font-family: 'Crimson Text', serif;
+    font-weight: bold;
+    font-size: 1.35em;
+    display: inline-flex;
 }
 
 .logo {
