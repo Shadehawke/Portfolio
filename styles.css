@@ -1,22 +1,13 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 h1, h2, h3 {
     font-family: 'Crimson Text', serif;
 }
 
 body {
-    font-family: 'Crimson Text', serif;
     background-image: url("images/raven background.jpg");
-    height: 800px;
-    width: 100%;
-    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    position: relative;
+    background-position: center center;
+    background-attachment: fixed;
 }
 
 footer {
@@ -29,114 +20,66 @@ footer {
     bottom: 0;
 }
 
-.container {
-    width: 100vw;
-    height: 100vh;
-    display: inline-flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-.navbar {
-    width: 100%;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    background-color: transparent;
+img {
+    max-width: 100%;
+    height: auto;
 }
 
 .header {
-    width: 100%;
-    height: 60px;
-}
-
-.menu {
-    height: 100%;
-    width: 100%;
-    display: inline-flex;
-    align-items: right;
-    list-style: none;
-    margin-left: 1300px;
-}
-
-.menu li {
-    display: block;
-    height: 100%;
-    font-family: 'Crimson Text', serif;
-    font-size: 28px;
-    font-weight: bold;
-    position: relative;
-    display: inline-flex;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    color: black;
-    text-shadow: 10px 5px 5px;
-    transition: all 300ms cubic-bezier(0.075, 0.82, 0.165. 1);
-    text-align: center;
-    padding: 0 10px;
-    margin-right: 30px;
-}
-
-.menu li:after, .menu li:before {
-    content: "";
-    position: absolute;
-    display: block;
-    border: 0px solid transparent;
-}
-
-.menu li:after {
-    width: 0%;
-    height: 80%;
-    border-top: 2px solid #000000;
-    border-bottom: 2px solid #000000;
-    transition: all 0.3s ease;
-}
-
-.menu li:before {
-    width: 120%;
-    height: 0%;
-    border-left: 2px solid #000000;
-    border-right: 2px solid #000000;
-    transition: all 0.5s ease;
-}
-
-.menu li:hover::before {
-    height: 80%;
-}
-
-.menu li:hover::after {
-    width: 120%;
 }
 
 .logo {
     margin-top: -30px;
 }
 
+.navbar {
+    display: flex;
+    list-style: none;
+    gap: 5rem;
+    margin-right: 60px;
+}
+
+.test {
+    font-family: 'Crimson Text', serif;
+    font-size: 28px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    text-shadow: 5px 8px 8px;
+}
+
+.shadow:hover {
+    display: flex;
+    margin-top: -20px;
+    transition: all 0.4s ease-in-out;
+}
+
+.intro {
+    position: absolute;
+    top: 27%;
+    left: 58%;
+    color: black;
+    text-shadow: 5px 9px 9px;
+    text-align: center;
+}
+
 .intro-text {
     font-weight: bold;
-    text-align: right;
-    margin-right: 190px;
-    margin-top: 150px;
-    word-wrap: normal;
 }
 
 .intro-sub-text-top {
     font-weight: bold;
-    text-align: right;
-    margin-right: 250px;
 }
 
 .intro-sub-text-middle {
     font-weight: bold;
-    text-align: right;
-    margin-right: 100px;
 }
 
 .intro-sub-text-bottom {
     font-weight: bold;
-    text-align: right;
-    margin-right: 80px;
-    word-wrap: normal;
 }
 
 .s-media {
