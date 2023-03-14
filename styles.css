@@ -25,13 +25,29 @@ img {
     height: auto;
 }
 
+.line {
+    width: 5%;
+    height: 10px;
+    margin-left: 23rem;
+    margin-right: auto;
+    border: 2px solid black;
+    border-radius: 5px;
+    background: black;
+}
+
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: fixed;
+    top: 50px;
+    right: 0;
 }
 
 .logo {
+    position: fixed;
+    top: 0;
+    left: 0;
     margin-top: -30px;
 }
 
@@ -49,6 +65,8 @@ img {
     text-decoration: none;
     color: black;
     text-shadow: 5px 8px 8px;
+    float: right;
+    
 }
 
 .shadow:hover {
@@ -115,6 +133,29 @@ img {
 
 .sm-collapse {
     left: -60px;
+}
+
+.about_header {
+    display: block;
+    font-size: 3rem;
+    letter-spacing: 1px;
+    letter-spacing: 3px;
+    text-align: left;
+    margin-top: 60rem;
+    margin-left: 19rem;
+    position: relative;
+    color: #000000;
+    font-weight: bold;
+    text-shadow: 5px 9px 9px;
+}
+
+.about_text {
+    color: black;
+    margin-left: 7rem;
+    margin-right: 70rem;
+    margin-bottom: 5rem;
+    word-wrap: normal;
+    text-shadow: 5px 8px 8px;
 }
 
 #sm-open {
