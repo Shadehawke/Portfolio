@@ -25,11 +25,21 @@ img {
     height: auto;
 }
 
-.line {
+.about_line {
     width: 5%;
     height: 10px;
     margin-left: 23rem;
     margin-right: auto;
+    border: 2px solid black;
+    border-radius: 5px;
+    background: black;
+}
+
+.projects_line {
+    width: 5%;
+    height: 10px;
+    margin-left: auto;
+    margin-right: 22rem;
     border: 2px solid black;
     border-radius: 5px;
     background: black;
@@ -153,6 +163,29 @@ img {
     color: black;
     margin-left: 7rem;
     margin-right: 70rem;
+    margin-bottom: 5rem;
+    word-wrap: normal;
+    text-shadow: 5px 8px 8px;
+}
+
+.projects_header {
+    display: block;
+    font-size: 3rem;
+    letter-spacing: 1px;
+    letter-spacing: 3px;
+    text-align: right;
+    margin-top: 35rem;
+    margin-right: 19rem;
+    position: relative;
+    color: #000000;
+    font-weight: bold;
+    text-shadow: 5px 9px 9px;
+}
+
+.projects_text {
+    color: black;
+    margin-right: 7rem;
+    margin-left: 80rem;
     margin-bottom: 5rem;
     word-wrap: normal;
     text-shadow: 5px 8px 8px;
