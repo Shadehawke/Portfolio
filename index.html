@@ -21,34 +21,64 @@
     </head>
 
     <body>
-        <nav class="navbar">
+        <section class="navigation">
+            <nav class="navbar">
 
-            <!-- LOGO -->
+                <!-- LOGO -->
 
-            <div class="logo">
-                <img src="images/rl logo with text.png" height="150px" width="150px">
-            </div>
-
-            <!-- NAVIGATION MENU -->
-
-            <ul class="nav-links">
-
-                <!-- USING CHECKBOX HACK -->
-
-                <input type="checkbox" id="checkbox_toggle">
-                <label for="checkbox_toggle" class="hamburger">&#9776;</label>
-
-                <!-- NAVIGATION MENUS -->
-
-                <div class="menu">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                <div class="logo">
+                    <img src="images/rl logo with text.png" height="150px" width="150px">
                 </div>
-            </ul>
-        </nav>
-        
+
+                <!-- NAVIGATION MENU -->
+
+                <ul class="nav-links">
+
+                    <!-- USING CHECKBOX HACK -->
+
+                    <input type="checkbox" id="checkbox_toggle">
+                    <label for="checkbox_toggle" class="hamburger">&#9776;</label>
+
+                    <!-- NAVIGATION MENUS -->
+
+                    <div class="menu">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </div>
+                </ul>
+            </nav>
+        </section>
+
+        <section class="sidebar">
+            <div class="s-media">
+                <a href="https://www.facebook.com/shawn.spitaleri" class="s-item facebook" target="_blank">
+                    <span class="fa-brands fa-facebook"></span>
+                </a>
+                
+                <a href="https://www.github.com/shadehawke" class="s-item github" target="_blank">
+                    <span class="fa-brands fa-github"></span>
+                </a>
+                
+            
+                <a href="https://www.linkedin.com/in/shawn-spitaleri-76091988/" class="s-item linkedin" target="_blank">
+                    <span class="fa-brands fa-linkedin"></span>
+                </a>
+
+                <a href="mailto: djravend@gmail.com" class="s-item email" target="_blank">
+                    <span class="fa-solid fa-envelope"></span>
+                </a>
+            
+                <a id="sm-close"  class="s-item print">
+                    <span class="fa-solid fa-arrow-left"></span>
+                </a>
+            
+             </div>
+             <a id="sm-open"  class="s-item print sm-collapse">
+                    <span class="fa-solid fa-arrow-right"></span>
+                </a>
+        </section>
 
 
 
@@ -57,9 +87,13 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
         <script type="text/javascript" src="index.js"></script> 
     </body>
-    <footer id="footer">
-        &copy; Copyright
-        <script>document.write(new Date().getFullYear())</script> 
-        by <a target="_blank" href="index.html">Raven's Loft Web Design/Shawn Spitaleri</a>
-    </footer>
+    <footer class="container p-4 rounded">
+        <div class="d-lg-flex justify-content-between">
+            <div class="copyright">
+                &copy; Copyright
+                <script>document.write(new Date().getFullYear())</script> 
+                by <a target="_blank" href="index.html">Raven's Loft Web Design/Shawn Spitaleri</a>
+            </div>
+        </div>
+    </footer>    
 </html>
