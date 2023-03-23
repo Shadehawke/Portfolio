@@ -21,6 +21,12 @@ footer {
     background-color: grey;
 }
 
+hr {
+    margin-left: auto!important;
+    margin-right: auto!important;
+    width: 10%;
+}
+
 .copyright {
     font-weight: bold;
     color: black;
@@ -145,6 +151,16 @@ input[type=checkbox] {
 
 .sm-collapse{
     left: -60px;
+}
+
+.intro {
+    text-align: center;
+    margin-top: 80px;
+}
+
+.headshot {
+    height: 12%;
+    width: 12%;
 }
    
 #sm-open {
