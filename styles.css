@@ -6,6 +6,7 @@
 }
 
 body {
+    margin: 0;
     font-family: 'Crimson Text', serif!important;
     display: flex;
     flex-direction: column;
@@ -19,12 +20,17 @@ li {
 footer {
     margin-top: auto;
     background-color: grey;
+    position: sticky;
+    bottom: 0px;
 }
 
 hr {
     margin-left: auto!important;
     margin-right: auto!important;
     width: 10%;
+    border: 2px solid #000000;
+    opacity: unset!important;
+    padding-bottom: 15rem!important;
 }
 
 .copyright {
@@ -41,6 +47,11 @@ hr {
 
 .logo {
     margin-top: -15px;
+}
+
+.navigation {
+    position: sticky;
+    top: 0px;
 }
 
 .navbar {
@@ -161,6 +172,11 @@ input[type=checkbox] {
 .headshot {
     height: 12%;
     width: 12%;
+}
+
+#about {
+    text-align: center;
+    margin-top: 80px;
 }
    
 #sm-open {
