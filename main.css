@@ -174,7 +174,8 @@ input[type=checkbox] {
     width: 12%;
 }
 
-#about {
+#about,
+#projects {
     text-align: center;
     margin-top: 80px;
 }
