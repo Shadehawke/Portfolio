@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- sitemap.xml — Raven's Loft Web Design -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Home (single-page site canonical) -->
+  <url>
+    <loc>https://rlwebdesign.net/</loc>
+    <lastmod>2025-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Example: if you later add a dedicated project page, include it like this:
+  <url>
+    <loc>https://rlwebdesign.net/projects/middle-path</loc>
+    <lastmod>2025-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  -->
+
+</urlset>

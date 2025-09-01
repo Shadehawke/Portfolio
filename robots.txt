@@ -1,0 +1,9 @@
+# robots.txt — Raven's Loft Web Design
+User-agent: *
+Allow: /
+
+# Don’t index the custom 404 page
+Disallow: /404.html
+
+# Your XML sitemap
+Sitemap: https://rlwebdesign.net/sitemap.xml

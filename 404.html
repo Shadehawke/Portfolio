@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Page Not Found | Raven's Loft Web Design</title>
+
+  <!-- Don’t index the 404 -->
+  <meta name="robots" content="noindex,follow" />
+
+  <!-- Brand fonts & styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="main.css" />
+  <script src="https://kit.fontawesome.com/132e59aa06.js" crossorigin="anonymous"></script>
+
+  <style>
+    /* Page-specific polish (lightweight, uses your variables) */
+    .notfound {
+      min-height: calc(100vh - 200px);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: var(--space-16) var(--space-4);
+      background:
+        radial-gradient(900px 320px at 80% 10%, rgba(255,255,255,0.03), transparent 60%),
+        radial-gradient(600px 220px at 10% 80%, rgba(163,29,47,0.06), transparent 60%),
+        linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
+      border-block: 1px solid var(--color-border);
+    }
+    .nf-card {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: var(--space-8);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+      box-shadow: var(--shadow-soft);
+    }
+    .nf-code {
+      display: inline-block;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: var(--space-1) var(--space-3);
+      border-radius: 999px;
+      border: 1px solid var(--color-border);
+      margin-bottom: var(--space-4);
+      color: var(--color-heading);
+      background: rgba(255,255,255,0.03);
+    }
+    .nf-links {
+      display: flex;
+      gap: var(--space-4);
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: var(--space-6);
+    }
+    .nf-links a.btn {
+      border-color: var(--color-border);
+      background: transparent;
+    }
+    .nf-links a.btn:hover,
+    .nf-links a.btn:focus-visible {
+      border-color: var(--color-heading);
+    }
+    .nf-small {
+      opacity: 0.85;
+      margin-top: var(--space-4);
+      font-size: var(--font-size-300);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header (reuse your sticky nav styles) -->
+  <header class="navigation">
+    <nav class="navbar" aria-label="Primary">
+      <div class="logo">
+        <img src="images/rl-logo.png" alt="Raven's Loft Web Design logo" class="logo-img" width="150" height="150" />
+      </div>
+      <input type="checkbox" id="checkbox_toggle" class="nav-toggle" aria-label="Toggle navigation" />
+      <label for="checkbox_toggle" class="hamburger" aria-hidden="true">&#9776;</label>
+      <ul class="nav-links">
+        <div class="menu">
+          <li><a href="/">Home</a></li>
+          <li><a href="/#about">About</a></li>
+          <li><a href="/#projects">Projects</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </div>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main -->
+  <main class="notfound" id="wrap" tabindex="-1">
+    <section class="nf-card" aria-labelledby="nf-title">
+      <span class="nf-code">404</span>
+      <h1 id="nf-title">This page has flown the coop.</h1>
+      <p>Sorry—looks like this link is broken or the page has moved. Let’s get you back to familiar ground.</p>
+
+      <div class="nf-links">
+        <a class="btn btn-primary" href="/">Back to Home</a>
+        <a class="btn" href="/#projects">View Projects</a>
+        <a class="btn" href="/#contact">Contact Me</a>
+      </div>
+
+      <p class="nf-small">If you typed the address, check the spelling. If you followed a link, it may be outdated.</p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="copyright">
+      &copy; <span id="year"></span> <a href="/">Raven's Loft Web Design / Shawn Spitaleri</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

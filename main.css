@@ -1,189 +1,925 @@
 /* UTILITIES */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:root {
+    /* Colors: modern gothic palette */
+    --color-bg: #0d0d10;
+    --color-bg-alt: #17121c;
+    --color-text: #d9d9d9;
+    --color-heading: #efeff1;
+    --color-accent: #a31d2f;
+    --color-border:#3a3342;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(180deg, #0d0d10 0%, #17121c 60%, #0d0d10 100%);
+
+    /* Spacing scale (4px base): 4, 8, 12, 16, 24, 32, 48, 64 */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    
+    /* Container widths */
+    --container: 1100px;
+    --container-narrow: 820px;
+
+    /* Typography */
+    --font-body: 'Crimson Text', serif;
+    --font-size-300: 1rem;      /* base text */
+    --font-size-400: 1.125rem;  /* slightly larger text */
+    --font-size-500: 1.25rem;   /* h5/subhead */
+    --font-size-600: 1.5rem;    /* h4 */
+    --font-size-700: 2rem;      /* h3 */
+    --font-size-800: 2.5rem;    /* h2 */
+    --font-size-900: 3rem;      /* h1 (desktop) */
+    --line-height: 1.5;
+
+    /* Radius & shadows */
+    --radius: 14px;
+    --shadow-soft: 0 10px 30px rgba(0,0,0,0.35);
+
+    --brand-fb: #1877f2;
+    --brand-gh: #c9d1d9;
+    --brand-li: #0a66c2;
+    --brand-mail: var(--color-accent);
+
+    /* responsive sidebar width (48–72px) and a tiny gap */
+    --sidebar-w: clamp(48px, 7vw, 72px);
+    --sidebar-gap: 8px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+html { scroll-behavior: smooth; }
+
+/* offset for anchor targets so content isn't hidden under the sticky navbar */
+section { scroll-margin-top: clamp(80px, 12vh, 140px); }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }
 
 body {
-    margin: 0;
-    font-family: 'Crimson Text', serif!important;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  line-height: var(--line-height);
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-accent);
+  color: var(--color-heading);
+  padding: var(--space-2) var(--space-4);
+  z-index: 2000;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* Headings use brighter color and a clear scale */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-heading);
+  line-height: 1.2;
+  margin-bottom: var(--space-4);
+}
+h1 { font-size: clamp(2rem, 4vw, var(--font-size-900)); }
+h2 { font-size: clamp(1.75rem, 3.2vw, var(--font-size-800)); }
+h3 { font-size: clamp(1.5rem, 2.8vw, var(--font-size-700)); }
+h4 { font-size: clamp(1.25rem, 2.2vw, var(--font-size-600)); }
+h5 { font-size: var(--font-size-500); }
+p, li { font-size: var(--font-size-400); }
+
+/* Links: default + hover accent */
+a { color: var(--color-text); text-decoration: none; }
+a:hover { color: var(--color-heading); }
+
+/* Section spacing rhythm */
+section {
+  padding: var(--space-12) var(--space-4);
+}
+
+/* Constrain content width and center it */
+#wrap {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-inline: var(--space-4);
+}
+
+/* Consistent vertical rhythm for sections */
+section {
+  padding-block: var(--space-16);
+}
+
+/* Section headings: consistent spacing + subtle divider option */
+.about-heading h1,
+.projects-heading h1,
+.contact-heading h1,
+.intro-heading h1 {
+  margin-bottom: var(--space-6);
+}
+
+.section-divider {
+  height: 1px;
+  background: var(--color-border);
+  margin: var(--space-12) auto;
+  width: min(90%, 720px);
+  border: 0;
 }
 
 li {
-    list-style: none;
+  list-style: none;
 }
 
-footer {
-    margin-top: auto;
-    background-color: grey;
-    position: sticky;
-    bottom: 0px;
-}
-
-hr {
-    margin-left: auto!important;
-    margin-right: auto!important;
-    width: 10%;
-    border: 2px solid #000000;
-    opacity: unset!important;
-    padding-bottom: 15rem!important;
+/* FOOTER baseline */
+.site-footer {
+  margin-top: auto;
+  padding: var(--space-6) var(--space-4);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
 }
 
 .copyright {
-    font-weight: bold;
-    color: black;
-    width: 100%;
-    height: 100%;
-    text-align: center;
+  font-weight: bold;
+  color: black;
+  width: 100%;
+  height: 100%;
+  text-align: center;
 }
 
 .copyright a {
-    color: black;
+  color: black;
 }
 
 .logo {
-    margin-top: -15px;
+  margin-top: -15px;
 }
 
+/* NAVIGATION */
+
+/* Sticky region */
 .navigation {
-    position: sticky;
-    top: 0px;
+  margin: 0;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* ensure on top of content */
 }
 
+/* Navbar container */
 .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.25rem;
-    background-color: grey;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  padding: var(--space-4) var(--space-6);
+  background: color-mix(in srgb, var(--color-bg) 85%, transparent);  /* subtle translucency */
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--color-border);
 }
 
-.nav-links a {
-    color: black;
-    text-decoration: none;
-    font-size: 20px;
-    font-weight: bold;
-    margin-right: 10px;
+.navbar.scrolled {
+  box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+  border-bottom-color: rgba(58,51,66,0.7); /* darken a touch */
 }
+
+/* Logo image sizing */
+.logo-img {
+  height: clamp(100px, 15.6vh, 150px);
+  width: auto;
+  display: block;
+  filter: brightness(0) invert(1) drop-shadow(0 0 4px rgba(0,0,0,0.6));
+}
+
+/* Nav list */
+.nav-links .menu {
+  display: flex;
+  gap: var(--space-6);
+}
+
+/* Links: silver → brighter on hover; underline accent with crimson */ 
+.nav-links a {
+  color: var(--color-text);
+  font-size: var(--font-size-400);
+  font-weight: 700;
+  text-decoration: none;
+  position: relative;
+  padding-block: 2px;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible {
+  color: var(--color-heading);
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -6px;
+  height: 2px; width: 0%;
+  background: var(--color-accent);
+  transition: width 220ms ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a:focus-visible::after {
+  width: 100%;
+}
+
+/* active link state (reuses your crimson underline) */
+.nav-links a.active { color: var(--color-heading); }
+.nav-links a.active::after { width: 100%; }
+
 
 .menu {
-    display: flex;
-    gap: 2.5em;
-    font-size: 18px;
-}
-
-.menu li:hover {
-    margin-top: -10px;
-    transition: 0.5s ease;
+  display: flex;
+  gap: 2.5em;
+  font-size: 18px;
 }
 
 .menu li {
-    padding: 5px 14px;
+  padding: 0;
 }
 
-/* RESPONSIVE NAVBAR MENU STARTS HERE */
-/* CHECKBOX HACK */
-input[type=checkbox] {
-    display: none;
+.menu li:hover {
+  margin-top: 0;
+  transition: none;
 }
 
-/* HAMBURGER MENU */
+/* RESPONSIVE NAVBAR MENU */
+/* CHECKBOX HACK: target the nav toggle only */
+.nav-toggle {
+  position: absolute;
+  inline-size: 1px; block-size: 1px;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0; padding: 0; margin: -1px;
+}
+
+/* HAMBURGER ICON */
 .hamburger {
-    display: none;
-    font-size: 24px;
-    user-select: none;
+  display: none;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  padding: var(--space-2) var(--space-3);
+  border-radius: 8px;
 }
 
 /* APPLYING MEDIA QUERIES */
 @media (max-width: 768px) {
-    .menu {
-        display: none;
-        position: absolute;
-        background-color: grey;
-        right: 0;
-        left: 0;
-        top: 120px;
-        text-align: center;
-        padding: 16px 0;
-    }
+  .hamburger { display: block; }
 
-    .menu li:hover {
-        display: inline-block;
-        transition: 0.5s ease;
-    }
+  /* Start hidden */
+  .nav-links .menu {
+    display: grid;
+    gap: var(--space-4);
+    position: absolute;
+    left: 0; right: 0;
+    top: 100%;
+    padding: var(--space-6);
+    background: color-mix(in srgb, var(--color-bg) 94%, transparent);
+    border-bottom: 1px solid var(--color-border);
+    transform-origin: top;
+    transform: scaleY(0.9);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 180ms ease, opacity 180ms ease;
+  }
 
-    .menu li + li {
-        margin-top: 12px;
-    }
+  /* When toggled */
+  .nav-toggle:checked ~ .nav-links .menu {
+    opacity: 1;
+    transform: scaleY(1);
+    pointer-events: auto;
+  }
 
-    input[type=checkbox]:checked ~ .menu {
-        display: block;
-    }
-
-    .hamburger {
-        display: block;
-    }
+  /* Mobile link sizing */
+  .nav-links a {
+    font-size: var(--font-size-500);
+    padding-block: var(--space-1);
+  }
 }
 
-.s-media{
-    position: fixed;
-    top: 250px ;
-    left: 0;
-    z-index: 1000;
-    transition: all linear 0.2s;
+/* High-visibility outline on keyboard focus */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+  box-shadow: 0 0 0 3px rgba(163,29,47,0.3);
+}
+
+/* Ensure the hamburger is clearly focusable */
+.hamburger:focus-visible {
+  background: color-mix(in srgb, var(--color-accent) 20%, transparent)
+}
+
+/* SOCIAL SIDEBAR */
+.s-media {
+  position: fixed;
+  top: 250px;
+  left: 0;
+  z-index: 2001;
+  transition: transform 180ms ease;
 }
 
 .s-media a:first-child {
-    border-radius: 0 5px 0 0;
+  border-radius: 0 5px 0 0;
 }
 
 .s-media a:last-child {
-    border-radius: 0 0 5px 0;
+  border-radius: 0 0 5px 0;
 }
 
 .s-item {
-    display: block;
-    width: 60px;
-    height: 60px;
-    color: #1E3050;
-    font-size: 25px;
-    line-height: 60px;
-    text-align: center;
-    transition: all linear 0.2s;
+  display: block;
+  width: var(--sidebar-w, 60px);
+  height: var(--sidebar-w, 60px);
+  color: #1E3050;
+  font-size: calc(var(--sidebar-w, 60px) * 0.42);         /* Keeping the icons proportionate */
+  line-height: var(--sidebar-w, 60px);
+  text-align: center;
+  transition: all linear 0.2s;
+  box-shadow: none;
+  background: rgba(255,255,255,0.02);
+  border-right: 1px solid var(--color-border);
 }
 
 .s-item:hover {
-    width: 70px;  
+  transform: translateX(2px) scale(1.05);
 }
 
-.sm-collapse{
-    left: -60px;
+/* Sidebar base */
+.sidebar { position: relative; z-index: 2000; }
+
+/* Move stack with transform */
+.sidebar.is-collapsed .s-media { transform: translateX(calc(-1 * var(--sidebar-w, 60px))); }
+.sidebar .s-media { transition: transform 180ms ease; }
+
+/* Keep the "open" tab peeking out */
+.sidebar.is-collapsed #sm-open { opacity: 1; pointer-events: auto; transform: translateX(0); } /* so tab sits at edge */
+#sm-open { left: 0; transition: transform 180ms ease, opacity 120ms ease; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar .s-media,
+  #sm-open { transition: none; }
 }
 
+/* Platform-specific hover glows */
+.facebook:hover { box-shadow: 0 8px 22px rgba(24,119,242,0.35); color: var(--brand-fb); }
+.github:hover { box-shadow: 0 8px 22px rgba(201,209,217,0.25); color: var(--brand-gh); }
+.linkedin:hover { box-shadow: 0 8px 22px rgba(10,102,194,0.35); color: var(--brand-li); }
+.email:hover { box-shadow: 0 8px 22px rgba(163,29,47,0.35); color: var(--brand-mail); }
+
+/* Keyboard focus parity */
+.s-item:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* The 'open' tab (right arrow) */
+#sm-open {
+  position: fixed;
+  top: 200px;
+  left: 0;          /* sits at the edge when visible */
+  border-radius: 0 30px 30px 0;
+  transition: transform 180ms ease, opacity 120ms ease;
+  z-index: 2002;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.wrap { margin-left: 0; }
+
+@media (min-width: 640px) {
+  .sidebar:not(.is-collapsed) + .wrap {
+    margin-left: calc(var(--sidebar-w) + var(--sidebar-gap));
+  }
+}
+
+/* MOBILE BEHAVIOR — collapsed by default, expandable via JS */
+@media (max-width: 480px) {
+  /* default: collapsed off-screen */
+  .sidebar .s-media {
+    transform: translateX(calc(-1 * var(--sidebar-w, 60px)));
+  }
+
+  /* when expanded, slide in */
+  .sidebar:not(.is-collapsed) .s-media {
+    transform: translateX(0);
+  }
+
+  /* show the open tab only when collapsed */
+  .sidebar.is-collapsed #sm-open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+  }
+
+  /* hide the open tab when expanded */
+  .sidebar:not(.is-collapsed) #sm-open {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* no left margin at this size */
+  .sidebar + .wrap { margin-left: 0 !important; }
+}
+
+/* HERO: Layout + Background */
 .intro {
-    text-align: center;
-    margin-top: 80px;
+  /* full-bleed band with subtle gradient */
+  background: var(--gradient-hero);
+  /* use grid for a clean two-column layout */
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: var(--space-12);
+  align-items: center;
+  /* give extra breathing room vs regular sections */
+  padding-block: clamp(var(--space-12), 10vh, var(--space-16));
+  /* soft bottom border to separate from next section */
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Left column: photo */
+.intro .photo {
+  display: flex;
+  justify-content: center;
 }
 
 .headshot {
-    height: 12%;
-    width: 12%;
+  width: clamp(180px, 28vw, 320px);
+  height: auto;
+  border-radius: 18px;
+  box-shadow: var(--shadow-soft);
+  object-fit: cover;
+  /* gentle vignette */
+  outline: 1px solid rgba(255,255,255,0.04);  
 }
 
-#about, 
-#projects {
-    text-align: center;
-    margin-top: 30px;
+/* Right column: text stack */
+.intro-heading h1{
+  margin: 0 0 var(--space-4) 0;
 }
-   
-#sm-open {
-    position: fixed;
-    top: 200px ;
-    left: -80px;
-    border-radius: 0 30px 30px 0;
-    transition: all linear 0.2s;
+
+.intro-text h5 {
+  color: var(--color-text);
+  font-size: var(--font-size-500);
+  opacity: 0.95;
+  max-width: 38ch;
+}
+
+/* Lightweight container to stack heading + subheading */
+.intro-heading,
+.intro-text {
+  justify-self: start;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2) var(--space-6);
+  border-radius: var(--radius);
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  text-decoration: none;
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  color: var(--color-heading);
+  border-color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 22%, transparent);
+  box-shadow: 0 0 0 0 rgba(163,29,47,0);
+}
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(163,29,47,0.35);
+}
+
+.btn-ghost {
+  color: var(--color-heading);
+  border-color: var(--color-border);
+  background: transparent;
+}
+.btn-ghost:hover,
+.btn-ghost:focus-visible {
+  transform: translateY(-1px);
+  border-color: var(--color-heading);
+}
+
+/* CTA group spacing */
+.intro-ctas {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .intro {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .intro-heading,
+  .intro-text {
+    justify-self: center;
+  }
+  .intro-text h5 {
+    margin-inline: auto;
+  }
+  .intro-ctas {
+    justify-content: center;
+  }
+}
+
+/* SECTIONS */
+#about,
+#projects,
+#contact {
+  text-align: center;
+  margin-top: 30px;
+}
+
+#about {
+  background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  position: relative;
+  overflow: clip;
+}
+
+#about::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: 
+    radial-gradient(1200px 400px at 80% 10%, rgba(255,255,255,0.03), transparent 60%),
+    radial-gradient(700px 260px at 10% 80%, rgba(163,29,47,0.06), transparent 60%);
+  mix-blend-mode: screen;
+}
+
+#about .about-heading h1 {
+  margin-bottom: var(--space-6);
+}
+
+#about .about-text {
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+  display: grid;
+  gap: var(--space-6);
+  text-wrap: pretty;
+}
+
+/* Paragraph rhythm inside About */
+#about p {
+  margin: 0;
+}
+
+/* Tighter copy for small screens */
+@media (max-width: 480px) {
+  #about .about-text { gap: var(--space-4); }
+  .highlight-box { padding: var(--space-4); }
+}
+
+
+/* Highlight Box */
+.highlight-box {
+  max-width: 680px;
+  margin: var(--space-12) auto 0;
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: 
+    linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+  box-shadow: 0 0 0 0 rgba(163,29,47,0);
+  transition: box-shadow 220ms ease, border-color 220ms ease, transform 160ms ease;
+}
+
+.highlight-box h3 {
+  margin-bottom: var(--space-3);
+  color: var(--color-heading);
+}
+
+.highlight-box p {
+  letter-spacing: 0.2px;
+  opacity: 0.95;
+}
+
+/* Hover/focus state: faint crimson aura */
+.highlight-box:hover,
+.highlight-box:focus-within {
+  border-color: color-mix(in srgb, var(--color-accent) 40%, var(--color-border));
+}
+
+/* Mobile spacing tune */
+@media (max-width: 768px) {
+  .highlight-box { margin-top: var(--space-8); }
+}
+
+/* Projects section frame */
+#projects {
+  background: linear-gradient(180deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Grid: centers a single card automatically flows when more cards appear */
+.projects-grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 720px);     /* force column size */
+  justify-content: center;
+  gap: var(--space-8);
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-4);
+}
+
+/* When more projects are added, this kicks in on wider screens */
+@media (min-width: 860px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, minmax(320px, 1fr));
+  }
+}
+@media (min-width: 1120px) {
+  .projects-grid {
+    grid-template-columns: repeat(3, minmax(320px, 1fr));
+  }
+}
+
+/* Card container */
+.project-card {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;       /* image, title, text, button */
+  gap: var(--space-4);
+  width: 100%;
+  max-width: 720px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  overflow: clip;
+  transition: transform 160ms ease, box-shadow 200ms ease, border-color 100ms ease;
+}
+
+/* Hover/focus polish */
+.project-card:hover,
+.project-card:focus-within {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--color-accent) 35%, var(--color-border));
+  box-shadow: 0 14px 36px rgba(163,29,47,0.18);
+}
+
+/* Title/text spacing */
+.project-card h3 {
+  margin: var(--space-4) var(--space-4) 0;
+  font-size: clamp(1.25rem, 2.2vw, var(--font-size-700));
+  color: var(--color-heading);
+}
+
+.project-card p {
+  margin: 0 var(--space-4) var(--space-4);
+  opacity: 0.95;
+}
+
+/* Image wrapper */
+.project-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  border-bottom: 1px solid var(--color-border);
+  background: #0f0f12;
+}
+
+/* Project CTA Button - styled like .btn.btn-primary */
+.project-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 var(--space-4) var(--space-4);
+  padding: var(--space-2) var(--space-6);
+  border-radius: var(--radius);
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  text-decoration: none;
+  color: var(--color-heading);
+  border: 1px solid var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 22%, transparent);
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+  box-shadow: 0 0 0 0 rgba(163,29,47,0.35);
+}
+.project-btn:hover,
+.project-btn:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(163,29,47,0.35);
+}
+
+/* Ensure card is a visible group on keyboard focus */
+.project-card:focus-within {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Ensure button has clear focus state even without hover */
+.project-btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* CONTACT SECTION */
+#contact {
+  background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  text-align: center;
+}
+
+/* Heading */
+#contact .contact-heading h1 {
+  margin-bottom: var(--space-6);
+}
+
+/* CONTACT FORM CONTAINER */
+.contact-form {
+  max-width: 680px;
+  margin: 0 auto;
+  display: grid;
+  gap: var(--space-6);
+  padding: var(--space-8) var(--space-6);
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+  box-shadow: var(--shadow-soft);
+  text-align: left; /* Align labels and inputs */
+}
+
+/* FORM FIELDS */
+.field {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.field label {
+  font-weight: 700;
+  color: var(--color-heading);
+  font-size: var(--font-size-400);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  background: rgba(255,255,255,0.02);
+  color: var(--color-heading);
+  font-family: var(--font-body);
+  font-size: var(--font-size-400);
+  line-height: 1.4;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Focus/Active States */
+.field input:focus,
+.field textarea:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-color: var(--color-accent);
+  background: rgba(255,255,255,0.05);
+}
+
+/* Error Text Placeholder */
+.field .error {
+  min-height: 1em;
+  color: var(--color-accent);
+  font-size: var(--font-size-300);
+  opacity: 0.9;
+}
+
+/* SUBMIT BUTTON (inherits your .btn styles) */
+#contact .btn {
+  justify-self: start;
+}
+
+@media (max-width: 768px) {
+  #contact .btn {
+    justify-self: center;
+  }
+}
+
+/* DISABLED BUTTON LOOK */
+#contact button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* SUBMIT STATUS MESSAGE */
+.submit-status {
+  min-height: 1.25em;
+  margin-top: var(--space-2);
+  font-size: var(--font-size-300);
+  color: var(--color-heading);
+  opacity: 0.95;
+}
+
+/* === Mobile spacing tune (phones) =============================== */
+@media (max-width: 480px) {
+  /* Global section rhythm: less vertical padding on small screens */
+  section { 
+    padding-block: var(--space-12);  /* was var(--space-16) */
+  }
+
+  /* Hero: slightly tighter */
+  .intro {
+    gap: var(--space-6);                         /* was var(--space-12) */
+    padding-block: clamp(var(--space-8), 8vh, var(--space-12));
+  }
+  .intro-text h5 { max-width: 32ch; }            /* keeps lines from stretching */
+
+  /* Section headings: reduce bottom space */
+  .about-heading h1,
+  .projects-heading h1,
+  .contact-heading h1,
+  .intro-heading h1 {
+    margin-bottom: var(--space-4);               /* was var(--space-6) */
+  }
+
+  /* About: you already tighten copy gap; keep consistent */
+  #about .about-text { gap: var(--space-4); }
+  .highlight-box { 
+    margin-top: var(--space-8);                  /* was var(--space-12) */
+    padding: var(--space-4);                     /* was var(--space-6) */
+  }
+
+  /* Projects grid/card: reduce padding and internal gaps a touch */
+  .projects-grid { 
+    padding: var(--space-6) var(--space-3);      /* was var(--space-8) var(--space-4) */
+    gap: var(--space-6);                         /* was var(--space-8) */
+  }
+  .project-card { gap: var(--space-3); }         /* was var(--space-4) */
+  .project-card h3 { margin: var(--space-3) var(--space-3) 0; }
+  .project-card p  { margin: 0 var(--space-3) var(--space-3); }
+
+  /* Contact form: tighter container padding */
+  .contact-form {
+    padding: var(--space-6) var(--space-4);      /* was var(--space-8) var(--space-6) */
+    gap: var(--space-4);                         /* was var(--space-6) */
+  }
+
+  /* Buttons: a bit shorter so groups wrap nicely */
+  .btn { padding: var(--space-2) var(--space-4); } /* was var(--space-2) var(--space-6) */
+
+  /* Divider width: slightly narrower for tiny viewports */
+  .section-divider { width: min(92%, 640px); }
+}
+
+/* === Ultra-small devices (very narrow) ========================= */
+@media (max-width: 360px) {
+  .intro-text h5 { max-width: 28ch; }
+  .btn { padding: var(--space-2) var(--space-3); }
+  .projects-grid { padding: var(--space-4) var(--space-2); }
 }
