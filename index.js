@@ -138,25 +138,27 @@
 
 // Fade-in on scroll (robust)
 window.addEventListener('DOMContentLoaded', () => {
-  const targets = document.querySelectorAll('.fade-in');
-
-  // Fallback: if no IO support, just show everything
-  if (!('IntersectionObserver' in window)) {
-    targets.forEach(el => el.classList.add('visible'));
-    return;
-  }
-
-  const io = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        obs.unobserve(entry.target); // animate once
-      }
+  try {
+    const targets = document.querySelectorAll('.fade-in');
+    if (!('IntersectionObserver' in window)) {
+      targets.forEach(el => el.classList.add('visible'));
+      return;
+    }
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -10% 0px'   // ← unit added here
     });
-  }, {
-    threshold: 0.1,              // trigger sooner
-    rootMargin: '0px 0px -10% 0' // tiny early nudge
-  });
-
-  targets.forEach(el => io.observe(el));
+    targets.forEach(el => io.observe(el));
+  } catch (e) {
+    console.error('Fade-in init failed:', e);
+    document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+  }
 });
+
