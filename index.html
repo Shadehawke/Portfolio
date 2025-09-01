@@ -48,14 +48,14 @@
     <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
 
     <script>
-      // Helper: lazily load GA ONLY after consent
+      // GA loader: only called after consent
       function loadGA() {
-        if (window.__gaLoaded) return;  // don’t double-load
+        if (window.__gaLoaded) return;
         window.__gaLoaded = true;
 
         var s = document.createElement('script');
         s.async = true;
-        s.src = "https://www.googletagmanager.com/gtag/js?id=G-7VD0ZGRKR0";
+        s.src = "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX";
         document.head.appendChild(s);
 
         window.dataLayer = window.dataLayer || [];
@@ -64,6 +64,13 @@
 
         gtag('js', new Date());
         gtag('config', 'G-XXXXXXX', { anonymize_ip: true });
+      }
+
+      // Small helper to emit events only if GA is present
+      function sendGAEvent(name, params) {
+        if (window.gtag) {
+          window.gtag('event', name, params || {});
+        }
       }
 
       window.addEventListener("load", function () {
@@ -82,24 +89,44 @@
             link: "Privacy",
             href: "/privacy.html"
           },
-          onInitialise: function () { if (this.hasConsented()) loadGA(); },
-          onStatusChange: function () { if (this.hasConsented()) loadGA(); }
-        }, function (popup) {
-          // <-- THIS is the instance you need to open later
-          window.__cc = popup;
 
-          // Wire up the footer button once we have the instance
-          var btn = document.getElementById('cookie-settings');
-          if (btn) {
-            btn.addEventListener('click', function () {
-              if (window.__cc && typeof window.__cc.open === 'function') {
-                window.__cc.open();   // opens the consent dialog
-              }
-            });
+          // If user had already accepted on a prior visit
+          onInitialise: function () {
+            if (this.hasConsented()) {
+              loadGA();
+              // Mark returning visitor as already accepted
+              sendGAEvent('cookie_consent', {
+                consent_status: 'accepted_existing'
+              });
+            }
+          },
+
+          // Fires whenever user clicks Allow or Decline
+          onStatusChange: function (status) {
+            if (this.hasConsented()) {
+              // New acceptance (or re-accept after change)
+              const firstLoad = !window.__gaLoaded;
+              loadGA();
+              sendGAEvent('cookie_consent', {
+                consent_status: firstLoad ? 'accepted' : 'reaccepted'
+              });
+            } else {
+              // Declined (or revoked later). GA might not be loaded in opt-in mode.
+              // If GA IS loaded (user revoked later), we can log it:
+              sendGAEvent('cookie_consent', { consent_status: 'declined' });
+            }
           }
+        }, function (popup) {
+          // Keep the instance to open settings from footer
+          window.__cc = popup;
+          var btn = document.getElementById('cookie-settings');
+          if (btn) btn.addEventListener('click', function(){
+            if (window.__cc && typeof window.__cc.open === 'function') window.__cc.open();
+          });
         });
       });
     </script>
+
 
 
 
