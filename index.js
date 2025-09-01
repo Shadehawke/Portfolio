@@ -136,20 +136,27 @@
   sections.forEach(sec => obs.observe(sec));
 })();
 
-// Fade-in on scroll
-(function() {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target); // animate once
-        }
-      });
-    },
-    { threshold: 0.2 } // trigger when 20% visible
-  );
+// Fade-in on scroll (robust)
+window.addEventListener('DOMContentLoaded', () => {
+  const targets = document.querySelectorAll('.fade-in');
 
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-})();
+  // Fallback: if no IO support, just show everything
+  if (!('IntersectionObserver' in window)) {
+    targets.forEach(el => el.classList.add('visible'));
+    return;
+  }
 
+  const io = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target); // animate once
+      }
+    });
+  }, {
+    threshold: 0.1,              // trigger sooner
+    rootMargin: '0px 0px -10% 0' // tiny early nudge
+  });
+
+  targets.forEach(el => io.observe(el));
+});

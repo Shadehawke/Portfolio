@@ -193,7 +193,10 @@ li {
   margin-top: -15px;
 }
 
-/* === Fade-in animations ====================================== */
+/* Safe default: visible if JS doesn’t run */
+.fade-in { opacity: 1; transform: none; }
+
+/* Animate only when users allow motion */
 @media (prefers-reduced-motion: no-preference) {
   .fade-in {
     opacity: 0;
