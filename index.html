@@ -68,14 +68,12 @@
 
       window.addEventListener("load", function () {
         window.cookieconsent.initialise({
-          // Force opt-in so GA runs only after consent
           type: "opt-in",
-          // Position & look
           position: "bottom-right",
           theme: "classic",
           palette: {
-            popup:  { background: "#0d0d10", text: "#d9d9d9" }, // bg/text (site colors)
-            button: { background: "#a31d2f", text: "#ffffff" }  // crimson + white
+            popup:  { background: "#0d0d10", text: "#d9d9d9" },
+            button: { background: "#a31d2f", text: "#ffffff" }
           },
           content: {
             message: "This site uses cookies (e.g. analytics) to improve your experience.",
@@ -84,21 +82,20 @@
             link: "Privacy",
             href: "/privacy.html"
           },
+          onInitialise: function () { if (this.hasConsented()) loadGA(); },
+          onStatusChange: function () { if (this.hasConsented()) loadGA(); }
+        }, function (popup) {
+          // <-- THIS is the instance you need to open later
+          window.__cc = popup;
 
-          // If user had a saved choice, act on it immediately
-          onInitialise: function (status) {
-            if (this.hasConsented()) {
-              loadGA();
-            }
-          },
-          // React to new choices
-          onStatusChange: function(status, chosenBefore) {
-            if (this.hasConsented()) {
-              loadGA();
-            } else {
-              // If you want to actively disable GA on decline,
-              // you could also clear cookies here (advanced).
-            }
+          // Wire up the footer button once we have the instance
+          var btn = document.getElementById('cookie-settings');
+          if (btn) {
+            btn.addEventListener('click', function () {
+              if (window.__cc && typeof window.__cc.open === 'function') {
+                window.__cc.open();   // opens the consent dialog
+              }
+            });
           }
         });
       });
@@ -158,7 +155,6 @@
     }
     </script>
 
-    
   </head>
 
   <body>
