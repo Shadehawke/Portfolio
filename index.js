@@ -135,3 +135,21 @@
 
   sections.forEach(sec => obs.observe(sec));
 })();
+
+// Fade-in on scroll
+(function() {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target); // animate once
+        }
+      });
+    },
+    { threshold: 0.2 } // trigger when 20% visible
+  );
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+})();
+
