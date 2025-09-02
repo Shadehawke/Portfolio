@@ -238,6 +238,53 @@ li {
   border-bottom-color: rgba(58,51,66,0.7); /* darken a touch */
 }
 
+/* NEW: Center title with flanking ravens */
+.navbar-title {
+  flex: 1;                              /* occupy center */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  text-align: center;
+  font-size: clamp(1.25rem, 2.5vw, var(--font-size-700));
+  font-weight: 700;
+  color: var(--color-heading);
+  user-select: none;
+}
+
+.navbar-title span { white-space: nowrap; }
+
+/* Raven icons (mirrored on the left) */
+.raven-icon {
+  height: 28px;
+  width: auto;
+  filter: brightness(0) invert(1) drop-shadow(0 0 0 rgba(163,29,47,0)); /* base */
+  opacity: 0.9;
+  transition: filter 200ms ease, transform 200ms ease;
+}
+
+.raven-icon.left { transform: scaleX(-1); }
+
+/* Hover glow: crimson aura on ravens */
+.raven-icon:hover,
+.navbar-title:hover .raven-icon {
+  filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(163,29,47,0.6));
+  transform: translateY(-1px);
+}
+
+/* Optional: soften for reduced motion users (only remove lift) */
+@media (prefers-reduced-motion: reduce) {
+  .raven-icon:hover,
+  .navbar-title:hover .raven-icon {
+    transform: none;
+  }
+}
+
+/* Hide ravens on smaller screens to keep space clean */
+@media (max-width: 768px) {
+  .navbar-title .raven-icon { display: none; }
+}
+
 /* Logo image sizing */
 .logo-img {
   height: clamp(100px, 15.6vh, 150px);
