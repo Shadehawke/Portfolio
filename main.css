@@ -285,6 +285,22 @@ li {
   .navbar-title .raven-icon { display: none; }
 }
 
+/* Hover animation for ravens */
+.navbar-title:hover .raven-icon.left {
+  transform: rotate(-15deg) scale(1.05);
+  filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(163,29,47,0.6));
+}
+
+.navbar-title:hover .raven-icon.right {
+  transform: rotate(15deg) scale(1.05);
+  filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(163,29,47,0.6));
+}
+
+.raven-icon {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+
 /* Logo image sizing */
 .logo-img {
   height: clamp(100px, 15.6vh, 150px);
